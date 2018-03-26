@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <style>
+            .fade-enter-active, .fade-leave-active {
+                transition: opacity .5s;
+            }
+
+            .fade-enter, .fade-leave-to {
+                opacity: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 
+            transition 태그 하위의 p 태그가 제거되거나 생성되는 것을 감지하여 
+            transition 에니메이션 효과가 발생
+        -->
+        <div id="app">
+            <transition name="fade">
+                <p v-if="seen">이제 나를 볼 수 있어요.</p>
+            </transition>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+        el: '#app',
+        data: {
+                seen: true
+            }
+        })
+    </script>
+</html>

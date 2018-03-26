@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 
+                javascript로 seen 값을 false로 변경하면 아래 문구가 안보임
+                이 기능은 DOM에서 엘리먼트를 제거하게 되는데 이 과정에서 트랜지션 효과를 적용할 수 있다.
+            -->
+            <p v-if="seen">이제 나를 볼 수 있어요.</p>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+        el: '#app',
+        data: {
+                seen: true
+            }
+        })
+    </script>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
+        <div id="app-2">
+            <!-- 
+                v-bind 속성을 "디렉티브"라고 함.
+                vue.js에서 디렉티브는 v- 접두어로 시작.
+                DOM에 특수한 반응형 동작을 수행. 즉, 자바스크립트를 통해 값을 변경하면 즉시 반영됨
+            -->
+            <span v-bind:title="message">
+                마우스를 올리면 동적으로 바인딩된 title을 볼 수 있음.
+            </span>
+        </div>
+    </body>
+    <script>
+        // DOM에 데이터 렌더링
+        var app = new Vue({
+        el: '#app',
+        data: {
+                message: '안녕하세요 Vue!'
+            }
+        })
+
+        // 동적 바인딩
+        // 크롬에서 콘솔창에 해당 변수(app2.message) 값을 변경하면 동적으로 변경됨
+        var app2 = new Vue({
+        el: '#app-2',
+        data: {
+                message: '이 페이지는 ' + new Date() + ' 에 로드 되었습니다.'
+            }
+        })
+    </script>
+</html>
