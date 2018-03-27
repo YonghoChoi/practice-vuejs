@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{ message }}</p>
+            <!--
+                v-on 디렉티브를 사용하여 Vue 인스턴스에 메소드를 호출하는 이벤트 리스너 첨부
+            -->
+            <button v-on:click="reverseMessage">메시지 뒤집기</button>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                    message: '안녕하세요! Vue.js!'
+                },
+            methods: {
+                reverseMessage: function() {
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+    </script>
+</html>

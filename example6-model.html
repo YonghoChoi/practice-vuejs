@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{ message }}</p>
+            <!--
+                v-model 디렉티브를 통해 View와 Model의 양방향 바인딩
+            -->
+            <input v-model="message">
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                    message: '안녕하세요! Vue.js!'
+            }
+        });
+    </script>
+</html>
