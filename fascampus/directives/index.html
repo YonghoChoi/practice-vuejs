@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <style>
+        .normal {
+            color: blue;
+        }
+
+        .active {
+            color: red;
+        }
+    </style>
+
+    <div id="app">
+        <!-- 한번만 렌더링하고, 이후 반응형으로 동작하지 않음 -->
+        <div v-once>{{ msg }}</div>
+        <div>{{ msg }}</div>
+        <div>{{ msg }}</div>
+    </div>
+
+    <div id="app2">
+        <!-- Vue data에 html이 포함된 경우 반영되지 않고 문자열 그대로 출력됨 -->
+        <div>{{ msg }}</div>
+
+        <!-- Vue data에 html이 포함된 경우 html 문법을 사용해서 반영 -->
+        <div v-html="msg"></div>
+    </div>
+
+    <div id="app3">
+        <!-- {{}} 내부에서 자바스크립트 표현식 사용 가능-->
+        <div>{{ number + 2 }}</div>
+        <div>{{ new Date() }}</div>
+        <div>{{ Math.round(1.7) }}</div>
+    </div>
+
+    <div id="app4">
+        <!-- vue data로 class를 지정하기 위해서는 v-bind:class 사용 -->
+        <div v-bind:class="className" 
+            v-on:click="changeClassName">
+            {{ msg }}
+        </div>
+
+        <!-- 약어로 아래와 같이 사용 가능 -->
+        <div :class="className"
+            @click="changeClassName">
+            {{ msg }}
+        </div>
+    </div>
+    <script>
+        // Vue는 data로 DOM을 관리. DOM 관리 부분에 data를 적용하려고 노력해야함
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello Vue!'
+            }
+        });
+
+        const vm2 = new Vue({
+            el: '#app2',
+            data: {
+                msg: 'Hello Vue!<br/>Good Job~',
+            }
+        });
+
+        const vm3 = new Vue({
+            el: '#app3',
+            data: {
+                number: 2
+            }
+        });
+
+        const vm4 = new Vue({
+            el: '#app4',
+            data: {
+                msg: 'Hello Vue!',
+                className: 'normal'
+            },
+            methods: {
+                changeClassName() {
+                    this.className = 'active';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
