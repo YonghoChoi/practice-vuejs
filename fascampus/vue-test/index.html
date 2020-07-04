@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{ msgA }}</div>
+        <div>{{ msgB }}</div>
+        <button v-on:click="changeMessage">Change!</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msgA: 'Message A.'
+            },
+            methods: {
+                changeMessage() {
+                    this.msgA = 'Changed message A!';
+
+                    // msgB는 Vue 객체가 생성될 당시 data에 포함되어있지 않았기 때문에 반응성을 갖지 않음
+                    // 디버그 창에서 vm.msgB에 데이터를 삽입해보면 데이터 변경이 html에 반영되지 않음
+                    this.msgB = 'Changed message B!';
+                }
+            },
+            // data가 변경될 때 트리거됨
+            watch: {
+                // 인자로 새롭게 변경된 data가 전달됨
+                msgA(val) {
+                    console.log(val);
+                }
+            }
+        })
+
+        console.log(vm);
+    </script>
+</body>
+
+</html>
