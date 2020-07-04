@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div ref="msg">{{ msg }}</div>
+        <div ref="div"></div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello Vue!'
+            },
+            beforeCreate() {
+                // vue 인스턴스 생성이 되기 전이기 때문에 msg 데이터를 확인할 수 없음
+                console.log('beforeCreate!!', this.msg);
+            },
+            created() {
+                // vue 인스턴스 생성이 완료되어 msg 데이터 확인 가능
+                console.log('created!!', this.msg);
+            },
+            beforeMount() {
+                // vue 인스턴스에 DOM 연결이 되지 않았기 때문에 refs 요소들을 참조 할 수 없음
+                console.log('beforeMount!!', this.$refs.div);
+            },
+            mounted() {
+                // vue 인스턴스에 DOM이 연결되어 refs 요소 참조 가능
+                console.log('mounted!!', this.$refs.div);
+            },
+            beforeUpdate() {
+                // 변경 되기 전이라서 디버그창에 vm.msg = 'hello' 입력 시 이전 문자열이 출력됨
+                console.log('beforeUpdate!!', this.$refs.msg.innerText);
+            },
+            updated() {
+                // 변경 된 후라서 디버그창에 vm.msg = 'hello' 입력 시 hello 문자열이 출력됨
+                console.log('updated!!', this.$refs.msg.innerText);
+            },
+            beforeDestory() {
+                // vm.$destory() 명령 실행 시 아직 삭제 전이기 때문에 데이터 조작 가능
+                console.log('beforeDestory!!');
+            },
+            destroyed() {
+                // vm.$destory() 명령 실행 시 아직 삭제 후이기 때문에 데이터 조작 불가능 (반응성x)
+                console.log('destroyed!!');
+            }
+        })
+    </script>
+</body>
+</html>
