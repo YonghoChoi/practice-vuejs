@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 핸들링 - 키 수식어</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>엔터키를 입력했을 때만 이벤트 핸들러 동작</p>
+        <!-- Vue에서 제공하는 키코드 이름에 포함되지 않은 키를 사용하려는 경우 키 코드를 직접 명시할 수도 있음. @keyup.13 -->
+        <input type="text" @keyup.enter="done">
+        
+        <p>Ctrl + s 입력</p>
+        <input type="text" @keydown.ctrl.83="save">
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            methods: {
+                done(e) {
+                    // 엔터키를 입력했을 때만 Done! 출력하고자 하는 경우 키 수식어를 사용하지 않으면 아래와 같이 처리해야함
+                    // if(e.keyCode === 13) {
+                    //     console.log('Done!');
+                    // }
+
+                    // 이벤트 수식어 .enter를 사용했기 때문에 별도 조건 처리 없이 엔터키 쳤을 때만 원하는 문구 출력
+                    console.log('Done!');
+                },
+                save() {
+                    console.log('Save!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
