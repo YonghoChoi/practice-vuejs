@@ -8,14 +8,15 @@
 </head>
 <body>
     <div id="app">
-        <button @click="pushTodo">Push</button>
+        <button @click="pushTodoUsingSet">Push</button>
         <ul class="todos">
             <li v-for="(todo, index) in todos"
                 :key="index">
                 {{ todo.title }}
             </li>
         </ul>
-
+        <br>
+        <button @click="addHompageUsingSet">Add Homepage property</button>
         <ul class="yongho">
             <!-- object 유형을 v-for로 반복할 경우 (value, key, index) 형태로 인자가 전달됨 -->
             <!-- 주의 : Vue의 인스턴스는 인스턴스가 생성될 때 반응성을 결정함. -->
@@ -50,12 +51,28 @@
 
                     // vue 인스턴스의 배열 data의 반응성을 유지하면서 데이터를 변경하려면 배열이 제공하는 내장 함수(push, pop 등)를 사용해야함
                     this.todos.push({title: '야식 먹기'});
-
+                },
+                addHompage() {
                     // object에 아래와 같이 직접 값을 대입하면 반응성 x
                     // this.yongho["gender"] = "male"
 
                     // Object.assign()을 사용하면 반응성 유지할 수 있음
                     Object.assign(this.yongho, {"gender": "male"});
+                },
+                pushTodoUsingSet() {
+                    // 반응성과 같은 문제로 인해 Vue 글로벌 객체에 데이터를 추가할 수 있는 내장 함수 제공
+                    // 원하는 index에 데이터 삽입 가능
+                    // 글로벌 객체 사용은 권장하지 않음
+                    Vue.set(this.todos, 3, { title: '야식 먹기'});
+
+                    // 위 글로벌 객체보다 범위를 좁혀 현 Vue 인스턴스 객체를 활용해서 동일한 처리를 할 수 있음 (권장)
+                    this.$set(this.todos, 4, { title: '간식 먹기'});
+
+                    
+                },
+                addHompageUsingSet() {
+                    // object의 경우에도 위 list의 경우와 동일하게 Vue 인스턴스의 $set 메서드 사용
+                    this.$set(this.yongho, "homepage", "https://yongho1037.tistory.com")
                 }
             }
         })
