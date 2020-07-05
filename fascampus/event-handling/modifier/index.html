@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 수식어</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <style>
+        .parent {
+            width: 200px;
+            height: 200px;
+            background: blue;
+        }
+
+        .child {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+
+    <div id="app">
+        <p>== 이벤트 버블링 방지 ==</p>
+        <div class="parent" @click="clickHandler">
+            <!-- child를 click하면 이벤트 버블링 발생하기 때문에 방지를 위해 stop 이벤트 수식어 사용 -->
+            <div class="child" @click.stop="clickHandler">
+            </div>
+        </div>
+        <br>
+        <p>== 이벤트 발생 순서 변경 ==</p>
+        <div class="parent" @click.capture="clickHandler">
+            <!-- child를 click하면 이벤트 버블링 발생하면서 콘솔창에 child, parent 순서로 로그가 기록되어야 하는데 capture로 인해 parent가 먼저 기록됨 -->
+            <div class="child" @click="clickHandler">
+            </div>
+        </div>
+        <br>
+        <p>== 선택된 엘리먼트에만 이벤트 적용 ==</p>
+        <!-- self 이벤트 수식어가 없을 경우 child 영역을 클릭해도 parent의 이벤트가 발생 -->
+        <!-- 엘리먼트가 겹쳐 있더라도 선택한 엘리먼트에 대한 이벤트만 처리하고자 하는 경우 self 이벤트 수식어 사용  -->
+        <div class="parent" @click.self="clickHandler">
+            <div class="child">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            methods: {
+                clickHandler(event) {
+                    console.log(event.currentTarget.className);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
