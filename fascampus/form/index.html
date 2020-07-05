@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>== 단방향 데이터 바인딩 ==</p>
+        <!-- input 태그의 value 속성에 message data 바인딩 -->
+        <!-- data 바인딩은 단방향. 
+            즉, script에서 Vue 인스턴스의 message data를 변경할 경우에는 브라우저에 변경된 내용이 렌더링 되지만
+            input form에서 데이터를 수정하는 경우 Vue 인스턴스의 message data에 반영되지 않음 -->
+        <input type="text" :value="message1">
+
+        <p>== 양방향 데이터 바인딩 (한글 입력 시 문자가 완성되어야 렌더링됨) ==</p>
+        <input type="text" v-model="message2">
+        <p>vue data : {{ message2 }}</p>
+
+        <p>== 한글 입력 즉시 반영 - 표현식 사용 ==</p>
+        <!-- 표현식으로 사용할 경우 vue 인스턴스에 내장된 $event property 사용 -->
+        <!-- 최초에 Vue 인스턴스 데이터를 표시하기 위해 value에 데이터 바인딩 -->
+        <input type="text" @input="korMessage1 = $event.target.value" :value="korMessage1">
+        <p>vue data : {{ korMessage1 }}</p>
+
+        <p>== 한글 입력 즉시 반영 - 메소드 사용 ==</p>
+        <input type="text" @input="bindMessage" :value="korMessage2">
+        <p>vue data : {{ korMessage2 }}</p>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message1: 'Hello~',
+                message2: 'Hello~',
+                korMessage1: '한글을 입력해보세요.',
+                korMessage2: '한글을 입력해보세요.'
+            },
+            methods: {
+                bindMessage(e) {
+                    this.korMessage2 = e.target.value;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
