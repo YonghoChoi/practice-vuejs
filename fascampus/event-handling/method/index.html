@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- @click에 호출될 Vue 인스턴스의 메서드를 지정할 때 인자 값을 지정하지 않으면 첫번째 인자로 이벤트 객체가 전달됨 -->
+            <!-- 특정 값을 인자로 전달할 경우 이벤트 객체가 전달되지 않기 때문에 이벤트 객체가 필요한 경우 $event 사용 -->
+            <li v-for="(todo, index) in todos"
+                :key="index"
+                :class="'item-' + (index + 1)"
+                @click="clickMethod(todo.title, $event)">
+                {{ todo.title }}
+            </li>
+        </ul>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { title: '아침 먹기'},
+                    { title: '점심 먹기'},
+                    { title: '저녁 먹기'}
+                ]
+            },
+            methods: {
+                clickMethod(title, event) {
+                    console.log(title);
+                    console.log(event.currentTarget.className);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
