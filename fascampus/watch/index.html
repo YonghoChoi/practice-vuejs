@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{ msg }}</div>
+        <div>{{ reversedMsg }}</div>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "Hello Vue!"
+            },
+            computed: {
+                reversedMsg: {
+                    get() {
+                        return this.msg.split('').reverse().join('');
+                    },
+                    set(value) {
+                        this.msg = value;
+                    }
+                }
+            },
+            watch: {
+                // data 이름과 동일한 함수 생성하면 해당 data에 변경 발생 시 call back
+                // 매개변수로 변경된 값이 전달됨
+                msg(newMsg) {
+                    console.log('New msg: ', newMsg);
+                },
+                // computed 데이터도 watch 가능
+                reversedMsg (newMsg) {
+                    console.log('New reversedMsg: ', newMsg);
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>
