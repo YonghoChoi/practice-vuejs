@@ -7,15 +7,40 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+    <style>
+        .box {
+            width: 200px;
+            height: 150px;
+            background: red;
+        }
+    </style>
     <div id="app">
-        <button>Toggle</button>
+        <!-- 토글 버튼을 누르면서 디버그창에서 엘리먼트의 변화 확인 -->
+        <button @click="toggle">Toggle</button>
+        <!-- 거의 대부분의 경우 v-if를 사용하지만 사용자 행위에 따라 자주 토글이 된다면 v-show 사용 -->
+
+        <!-- v-if를 사용하면 엘리먼트를 아예 제거해버림 -->
+        <!-- 엘리먼트가 제거되고 생성되는 작업이 반복되면 토글 비용이 큼 (엘리먼트 생성/제거 비용이 발생) -->
+        <!-- 필요하지 않은 경우 초기에 렌더링 자체가 안되기 때문에 상황에 따라 더 효율적일 수 있음 -->
+        <div v-if="show"
+            class="box"></div>
+
+        <!-- v-show를 사용하게되면 엘리먼트가 제거되지 않고 style 설정에 display: none;이 추가됨 -->
+        <!-- 엘리먼트 제거 없이 스타일 지정으로 화면에서 감추기 때문에 토글 비용이 적음 -->
+        <div v-show="show"
+            class="box"></div>
     </div>
 
     <script>
         const vm = new Vue({
             el: '#app',
             data: {
-                
+                show: true
+            },
+            methods: {
+                toggle () {
+                    this.show = !this.show;
+                }
             }
         })
     </script>
