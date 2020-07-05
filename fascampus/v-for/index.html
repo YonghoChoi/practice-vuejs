@@ -50,6 +50,12 @@
 
                     // vue 인스턴스의 배열 data의 반응성을 유지하면서 데이터를 변경하려면 배열이 제공하는 내장 함수(push, pop 등)를 사용해야함
                     this.todos.push({title: '야식 먹기'});
+
+                    // object에 아래와 같이 직접 값을 대입하면 반응성 x
+                    // this.yongho["gender"] = "male"
+
+                    // Object.assign()을 사용하면 반응성 유지할 수 있음
+                    Object.assign(this.yongho, {"gender": "male"});
                 }
             }
         })
