@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{ reversedMsg }}</div>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "Hello Vue!"
+            },
+            computed: {
+                // 함수 형태로 computed를 정의하면 해당 함수명으로 property가 생성되고 getter 메소드에 구현내용이 추가됨
+                // reversedMsg() {
+                //     return this.msg.split('').reverse().join('');
+                // },
+
+                // 위 함수를 아래와 같이 getter/setter로 표현 가능
+                reversedMsg: {
+                    get() {
+                        return this.msg.split('').reverse().join('');
+                    },
+                    set(value) {
+                        // data가 갱신되면 해당 data에 대한 computed도 갱신됨
+                        // 즉 setter가 호출되면 computed를 사용한 데이터도 갱신됨 (반응형)
+                        this.msg = value
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

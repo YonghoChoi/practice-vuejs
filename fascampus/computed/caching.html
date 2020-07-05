@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{ reverseMsg() }}</div>
+        <div>{{ reverseMsg() }}</div>
+        <div>{{ reversedMsg }}</div>
+        <div>{{ reversedMsg }}</div>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "Hello Vue!"
+            },
+            computed: {
+                // 데이터가 변경되지 않는 한 처음 호출 시 계산 된 값을 캐싱해서 사용
+                reversedMsg() {
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            methods: {
+                // 호출 될 때마다 매번 연산
+                reverseMsg() {
+                    return this.msg.split('').reverse().join('');
+                }
+            }
+        })
+    </script>
+</body>
+</html>

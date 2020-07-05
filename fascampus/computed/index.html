@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="todos">
+            <!-- key로 사용할 요소가 없을 경우 computed를 활용하여 필요한 값을 추가 할 수 있음 -->
+            <div v-for="todo in computedTodos"
+                :key="todo.id">
+                <input type="checkbox" v-model="todo.done">
+                <span>{{ todo.title }}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { title: '아침 먹기'},
+                    { title: '점심 먹기'},
+                    { title: '저녁 먹기'}
+                ]
+            },
+            computed: {
+                // computed는 함수 반환값이 있어야 사용 가능
+                computedTodos() {
+                    return this.todos.map((todo, index) => {
+                        // 기존 object에 값을 추가 하지 않고 새로운 object를 생성해서 반환
+                        // Object.assign을 사용하면 기존 object에 데이터를 추가하여 새로운 object 생성
+                        // return Object.assign({}, todo, {
+                        //     id: index + 1,
+                        //     done: false
+                        // });
+
+                        // 위 Object.assign과 동일한 처리 (간소화)
+                        return {
+                            ...todo,
+                            id: index + 1,
+                            done: false
+                        };
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
