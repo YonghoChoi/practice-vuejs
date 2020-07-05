@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="pushTodo">Push</button>
+        <ul class="todos">
+            <li v-for="(todo, index) in todos"
+                :key="index">
+                {{ todo.title }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    { title: '아침 먹기'},
+                    { title: '점심 먹기'},
+                    { title: '저녁 먹기'}
+                ]
+            },
+            methods: {
+                pushTodo () {
+                    // 주의 : data에 대입 연산자로 직접적인 대입이 일어날 경우 반응성을 가질 수 없음
+                    // this.todos[3] = {title: '야식 먹기'};
+
+                    // vue 인스턴스의 배열 data의 반응성을 유지하면서 데이터를 변경하려면 배열이 제공하는 함수(push, pop 등)를 사용해야함
+                    this.todos.push({title: '야식 먹기'});
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>
