@@ -15,6 +15,18 @@
                 {{ todo.title }}
             </li>
         </ul>
+
+        <ul class="yongho">
+            <!-- object 유형을 v-for로 반복할 경우 (value, key, index) 형태로 인자가 전달됨 -->
+            <!-- 주의 : Vue의 인스턴스는 인스턴스가 생성될 때 반응성을 결정함. -->
+            <!-- Vue 인스턴스 생성 당시 추가된 object의 property의 경우 변경할 경우에는 반응성이 유지되지만 새로운 property를 추가할 경우에는 반응성 x -->
+            <!-- 첫번째 방법으로 미리 추가될 property들을 알고 있다면 빈 값으로 미리 추가해놓으면 반응성을 유지할 수 있음. 두번째 방법으로는 Object.assign() 사용 -->
+            <li v-for="(value, key, index) in yongho"
+                :key="index">
+                {{ value }}
+            </li>
+
+        </ul>
     </div>
 
     <script>
@@ -25,14 +37,18 @@
                     { title: '아침 먹기'},
                     { title: '점심 먹기'},
                     { title: '저녁 먹기'}
-                ]
+                ],
+                yongho: {
+                    name: 'yongho',
+                    age: 35
+                }
             },
             methods: {
                 pushTodo () {
                     // 주의 : data에 대입 연산자로 직접적인 대입이 일어날 경우 반응성을 가질 수 없음
                     // this.todos[3] = {title: '야식 먹기'};
 
-                    // vue 인스턴스의 배열 data의 반응성을 유지하면서 데이터를 변경하려면 배열이 제공하는 함수(push, pop 등)를 사용해야함
+                    // vue 인스턴스의 배열 data의 반응성을 유지하면서 데이터를 변경하려면 배열이 제공하는 내장 함수(push, pop 등)를 사용해야함
                     this.todos.push({title: '야식 먹기'});
                 }
             }
