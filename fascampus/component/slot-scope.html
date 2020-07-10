@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>==========non slot==========</p>
+        <my-comp>
+            <!-- slot scope를 사용하면 자식 컴포넌트에서 slot data를 담아두고, 아래 부모 컴포넌트에서 가져다 사용할 수 있음 -->
+            <template slot-scope="myProps">
+                <!-- HTML 영역의 kebab case로 쓰여진 속성은 자바스크립트에서 camel case로 변환해서 사용해야함 -->
+                {{ myProps.mySlotData }}
+            </template>
+
+            <!-- 객체로 받지 않고 간소화해서 사용 가능 -->
+            <template slot-scope="{ mySlotData }">
+                {{ mySlotData }}
+            </template>
+        </my-comp>
+    </div>
+
+    <script>
+        Vue.component('my-comp', {
+            template: '<div><slot :my-slot-data="message"></slot></div>',
+            data() {
+                return {
+                    message: 'Hello Slot~'
+                }
+            }
+        });
+        const vm = new Vue({
+            el: '#app'
+        })
+    </script>
+
+</body>
+
+</html>
