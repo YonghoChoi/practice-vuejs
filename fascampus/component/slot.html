@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>==========non slot==========</p>
+        <non-slot>
+            <!-- 컴포넌트 내에 input 태그를 생성해도 브라우저에서 input 태그를 볼 수 없음. 빈 div 태그만 보임 -->
+            <!-- 컴포넌트 내 컨텐츠는 화면에 렌더링 되지 않음 -->
+            <!-- 컴포넌트 내에서 컨텐츠를 보이고 싶을 때 Slot을 사용 -->
+            <input type="text">
+        </non-slot>
+        <p>==========using slot==========</p>
+        <using-slot>
+            <input type="text">
+            <br>
+            Hello Slot!
+        </using-slot>
+
+        <p>==========slot contents==========</p>
+        <slot-contents>
+        </slot-contents>
+
+        <p>==========slot name==========</p>
+        <slot-name>
+            <!-- 컴포넌트에서 정의한 slot name 지정 -->
+            <!-- div가 먼저 작성되었는데 컴포넌트의 slot 지정 순서에 따라 input이 먼저 표시됨 -->
+            <div slot="slot1">Hello Slot!</div>
+            <p>Slot Text1</p>
+            <input type="text">
+            <p>Slot Text2</p>
+        </slot-name>
+    </div>
+
+    <script>
+        Vue.component('non-slot', {
+            template: '<div></div>'
+        });
+
+        Vue.component('using-slot', {
+            template: '<div><slot></slot></div>',
+        });
+
+        Vue.component('slot-contents', {
+            // 컴포넌트 내에 컨텐츠가 존재하지 않을 경우 template에 지정한 slot 태그 사이의 컨텐츠로 대체됨
+            // 컴포넌트를 사용하는 HTML 영역에 컨텐츠가 존재할 경우에는 아래 template slot 컨텐츠는 표시되지 않음
+            template: '<div><slot>대체 콘텐츠</slot></div>',
+        });
+
+        Vue.component('slot-name', {
+            // slot name을 지정한 경우 컴포넌트 내 slot name을 HTML 영역의 attribute로 가지고 있는 컨텐츠를 아래 template 해당 위치에 표시
+            // slot name이 지정되지 경우 HTML 영역의 slot attribute가 지정되지 않은 컨텐츠를 표시
+            template: '<div><slot></slot> <slot name="slot1"></slot></div>',
+        });
+
+        const vm = new Vue({
+            el: '#app'
+        })
+    </script>
+
+</body>
+
+</html>
