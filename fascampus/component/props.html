@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- my-comp 전역 컴포넌트의 props인 msg에 #app에 매핑된 Vue 인스턴스의 message 데이터를 바인딩 -->
+        <!-- javascript에서 camel case로 정의한 것은 html에서는 모두 kebab case로 변환해서 사용해야함 -->
+        <my-comp :my-msg="message"></my-comp>
+    </div>
+
+    <script>
+        Vue.component('my-comp', {
+            template: '<div>{{ myMsg }} </div>',
+            // 컴포넌트를 사용하는 외부에서 props를 통해 데이터를 전달 받음
+            // props: {
+            //     msg: String     // 전달받는 데이터의 type을 지정할 수 있음
+            // }
+
+            // props: {
+            //     // type 뿐만 아니라 기본값도 지정하고자 한다면 object 형태로 props를 정의할 수 있음
+            //     msg: {
+            //         type: String,
+            //         default: 'This is default data.'
+            //     }
+            // }
+
+            // props: {
+            //     // 문자열뿐만 아니라 숫자 타입도 전달될 수 있는 경우 다수의 type 지정 가능
+            //     msg: {
+            //         type: [String, Number],
+            //         default: 'This is default data.',
+            //     }
+            // }
+
+            props: {
+                myMsg: {
+                    type: [String, Number],
+                    required: true, // 해당 컴포넌트를 사용할 때 필수적으로 설정되어야 하는 props인 경우 required를 true로 설정
+                    // 컴포넌트의 해당 props의 유효성 검사, return이 false인 경우 개발자도구에 오류 발생시킴
+                    validator: function(value) {
+                        return value === 'Hello';
+                    }
+                }
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            // 되도록이면 data를 함수형태로 정의하는 것이 좋음.
+            data() {
+                return {
+                    message: 'Hello'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
