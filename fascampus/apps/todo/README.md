@@ -72,6 +72,19 @@ SCSS는 CSS 전처리 용도로 사용
 npm i -D sass-loader node-sass
 ```
 2. webpack 설정의 rule 추가
+3. POST CSS 처리를 위한 모듈 설치
+```
+npm i -D postcss-loader autoprefixer
+```
+4. packages js에 설정 추가
+```
+{
+  "browserslist": [
+    "last 2 versions", // 최신 브라주의 마지막 두번째 버전
+    "ie >= 10"  // 인터넷익스플로러 10버전 이상
+  ]
+}
+```
 
 ### 실행
 1. dev 모드로 실행
