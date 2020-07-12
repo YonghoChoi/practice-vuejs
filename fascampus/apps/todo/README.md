@@ -50,4 +50,12 @@ npm i -D vue-loader vue-template-compiler vue-style-loader css-loader
 ```
 npm i vue
 ```
-
+10. 변경사항 즉시 반영하여 확인해볼 수 있도록 webpack dev sever 설치
+```
+npm i -D webpack-dev-server
+```
+  - -D 옵션을 사용했기 때문에 CLI에서는 사용이 불가능하고 package.json파일의 scripts 설정에 지정해야함
+11. dev 모드로 실행
+```
+npm run dev
+```
