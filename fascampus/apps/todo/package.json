@@ -1,7 +1,11 @@
 {
   "name": "todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Vue Todo App",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YonghoChoi/practice-vuejs"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
