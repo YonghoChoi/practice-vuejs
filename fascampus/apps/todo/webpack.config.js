@@ -15,6 +15,9 @@ require('@babel/polyfill') // import만 하고 사용은 하지 않기 때문에
 module.exports = (env, opts) => {
     const config = {
         // 공통 옵션
+        resolve: { // 생략하고자 하는 확장자 지정 (자바스크립트 파일에서 import 구분에서 확장자를 따로 지정하지 않아도 됨)
+            extensions: ['.vue', '.js']
+        },
         entry: {
             // webpack 실행 진입점. webpack으로 프로젝트 bundle 실행 시 가장 먼저 실행될 파일 지정
             app: [

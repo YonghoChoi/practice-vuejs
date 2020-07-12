@@ -1,5 +1,5 @@
 import Vue from 'vue' // vue 인스턴스 사용을 위해 import
-import App from './App.vue' // 컴포넌트 import, App.vue는 최상위 컴포넌트 (모든 Vue 컴포넌트와 연결되는 컴포넌트)
+import App from './App' // 컴포넌트 import, App.vue는 최상위 컴포넌트 (모든 Vue 컴포넌트와 연결되는 컴포넌트)
 
 new Vue({
     el: '#app',
