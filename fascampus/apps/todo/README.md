@@ -72,11 +72,13 @@ SCSS는 CSS 전처리 용도로 사용
 npm i -D sass-loader node-sass
 ```
 2. webpack 설정의 rule 추가
-3. POST CSS 처리를 위한 모듈 설치
+
+### POST CSS 관련 설치
+1. POST CSS 처리를 위한 모듈 설치
 ```
 npm i -D postcss-loader autoprefixer
 ```
-4. packages js에 설정 추가
+2. packages js에 설정 추가
 ```
 {
   "browserslist": [
@@ -84,6 +86,26 @@ npm i -D postcss-loader autoprefixer
     "ie >= 10"  // 인터넷익스플로러 10버전 이상
   ]
 }
+```
+3. webpack 설정의 rule 추가
+
+### ESLint 설치
+
+1. module 지정
+```
+npm i -D eslint@^5 babel-eslint eslint-config-standard@^12 eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard eslint-plugin-vue
+```
+2. package.json 파일에 내용 추가
+```
+{
+  "lint": "eslint --ext .js,.vue .",
+  "lint:fix": "eslint --fix --ext .js,.vue ."
+}
+```
+- 검사와 수정까지 eslint가 하도록 설정
+3. lint 실행
+```
+npm run lint
 ```
 
 ### 실행
