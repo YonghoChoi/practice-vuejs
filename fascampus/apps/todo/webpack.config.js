@@ -3,6 +3,7 @@ const path = require('path') // 경로 지정을 돕기 위해 path 모듈 impor
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // webpack 빌드 시 index.html을 dist로 추출하기 위한 플러그인
 // const CopyPlugin = require('copy-webpack-plugin') // favicon 파일을 webpack 빌드 시 복사하기 위한 플러그인 (windows에서 오류가 발생하여 주석)
+const {CleanWebpackPlugin} = require('clean-webpack-plugin') // dist 디렉토리가 계속 덮어씌워지는 것을 방지하기 위해 빌드 시 제거하고 새로 파일 추가, Destructuring 방식으로 import
 require('@babel/polyfill') // import만 하고 사용은 하지 않기 때문에 변수 대입 없음
 
 module.exports = {
@@ -50,6 +51,7 @@ module.exports = {
         //         from: 'assets',
         //         to: 'dist'
         //     }],
-        // })
+        // }),
+        new CleanWebpackPlugin()    // output에 설정한 dist 디렉토리를 삭제하고 빌드 실행
     ]
 }
