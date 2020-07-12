@@ -103,10 +103,15 @@ npm i -D eslint@^5 babel-eslint eslint-config-standard@^12 eslint-plugin-import 
 }
 ```
 - 검사와 수정까지 eslint가 하도록 설정
-3. lint 실행
+3. 검사만 실행
 ```
 npm run lint
 ```
+4. 검사 후 수정까지 실행
+```
+npm run lint:fix
+```
+
 
 ### 실행
 1. dev 모드로 실행
