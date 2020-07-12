@@ -20,4 +20,8 @@ npm i -g webpack-cli
 ```
 npm i -D vue-loader vue-template-compiler
 ```
-
+7. vue 파일의 자동완성을 위해 추가 플러그인 vetur 설치
+8. 브라우저에서 vue를 사용할 수 있도록 vue 모듈 설치
+```
+npm i vue
+```
